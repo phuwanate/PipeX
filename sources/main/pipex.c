@@ -6,7 +6,7 @@
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 11:46:55 by plertsir          #+#    #+#             */
-/*   Updated: 2023/06/21 16:26:34 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/06/23 18:34:32 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,60 +20,67 @@
 #include "libft.h"
 #include "pipex.h"
 
-
-static char	**split_path(char *str, char c)
+static void	**open_pipes(t_data *data)
 {
-	char	**path_split;
-	int		i;
+	int	i;
 
-	path_split = ft_split(str, c);
-	if (!path_split)
-		force_quit(1);
+	data->pipes = malloc(data->pipe_nb * sizeof(int *));
+	if (!data->pipes)
+		exit(1);
 	i = 0;
-	return (path_split);
-}
-
-static void	get_cmd(char **av)
-{
-	char	**arg_split;
-	int		i;
-
-	arg_split = ft_split(av[1], ' ');
-	i = 0;
-}
-
-static void	get_path(char **envp, char **av)
-{
-	int		i;
-	int		status;
-	size_t	len;
-	char	*path;
-	char	**path2;
-
-	i = 0;
-	while (*envp)
+	while (i < data->pipe_nb)
 	{
-		len = ft_strlen(*envp);
-		status = find_path(*envp);
-		if (status == 1)
-			break ;
-		envp++;
+		data->pipes[i] = (int *)malloc(2 * sizeof(int));
+		if (!data->pipes[i])
+			exit(2);
+		if (pipe(data->pipes[i]))
+			exit(3);
+		i++;
 	}
-	path = ft_substr(*envp, 5, len);
-	path2 = split_path(path, ':');
-	path = ft_strjoin(*path2, "/");
-	path = ft_strjoin("/bin/", *av);
-	path2 = split_path(path, ' ');
-	execve(path2[0], path2, NULL);
-	while (path2[i])
-		printf("%s\n", path2[i++]);
+	return (0);
+}
+
+static t_data	*make_struct(int ac)
+{
+	t_data	*data;
+
+	data = malloc(sizeof(t_data));
+	data->pipe_nb = ac - 4;
+	if (!data)
+		exit(1);
+	data->pid = malloc((ac - 3) * sizeof(int));
+	if (!(data->pid))
+	{
+		free(data->pid);
+		exit(1);
+	}
+	return (data);
 }
 
 int	main(int ac, char *av[], char *envp[])
 {
-	if (ac > 2)
+	int		i;
+	t_data	*data;
+
+	data = make_struct(ac);
+	open_pipes(data);
+	i = 1;
+	while (av[i])
 	{
-		get_cmd(&av[0]);
-		get_path(&envp[0], &av[1]);
+		data->pid[i - 1] = fork();
+		if (data->pid[i - 1] == 0)
+		{
+			if (i == 1 || i == ac - 1)
+				open_file(i, av[i]);
+			if (i != 1 && i != ac - 1)
+				get_path(&envp[0], get_cmd(av[i]));
+			return 0;
+		}
+		i++;
 	}
+	return (0);
 }
+
+
+//created child + parent 
+//need to pipe in child

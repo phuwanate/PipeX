@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <stdlib.h>
 #include <sys/wait.h>
 
-void make_child(int (*pipes)[2], int proc)
+void make_child(int **pipes, int proc)
 {
     int i;
     int j;
@@ -58,17 +59,60 @@ void make_child(int (*pipes)[2], int proc)
     printf("Total result : %d\n", sum);
 }
 
+int **open_pipes(int proc)
+{
+    int i;
+    int **pipes;
+
+    pipes = malloc((proc + 1) * sizeof(*pipes));
+    if (pipes == NULL) {
+        perror("Failed to allocate memory for pipes");
+        exit(EXIT_FAILURE);
+    }
+
+    for (i = 0; i < proc + 1; i++) {
+        pipes[i] = malloc(2 * sizeof(int));
+        if (pipes[i] == NULL) {
+            perror("Failed to allocate memory for pipe");
+            exit(EXIT_FAILURE);
+        }
+        if (pipe(pipes[i]) == -1) {
+            perror("Failed to create pipe");
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    return pipes;
+}
+
 int main(int ac, char *av[])
 {
     int proc = ac - 3;
-    int pipes[proc + 1][2];
-    int pid[proc];
-    int i;
-    int j;
+    int **pipes;
 
-    proc = ac - 3;
-    i = 0;
-    while (i < proc + 1)
-        pipe(pipes[i++]);
-    make_child(&pipes[0], proc);
+    pipes = open_pipes(proc);
+    make_child(pipes, proc);
+
+    // Free the allocated memory
+    for (int i = 0; i < proc + 1; i++) {
+        free(pipes[i]);
+    }
+    free(pipes);
+
+    return 0;
 }
+
+// int main(int ac, char *av[])
+// {
+//     int proc = ac - 3;
+
+//     int pipes[proc + 1][2];
+	
+// 	// pipes = open_pipes(proc);
+//     int i = 0;
+//     while(i < proc + 1)
+//     {
+//         pipe(pipes[i++]);
+//     }
+//     make_child(pipes, proc);
+// }
