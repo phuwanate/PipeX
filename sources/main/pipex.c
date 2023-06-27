@@ -6,7 +6,7 @@
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 11:46:55 by plertsir          #+#    #+#             */
-/*   Updated: 2023/06/23 18:34:32 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/06/27 19:14:51 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	open_pipes(t_data *data)
 	int	i;
 
 	data->pipes = malloc(data->pipe_nb * sizeof(int *));
+	dprintf(2, "pipe_nb[%d]\n", data->pipe_nb);
 	if (!data->pipes)
 		exit(4);
 	i = 0;
@@ -37,18 +38,17 @@ static void	open_pipes(t_data *data)
 			exit(6);
 		i++;
 	}
-	return (0);
+	dprintf(2, "the pipe is [%d]\n", data->pipes[0][1]);
 }
 
-static void	close_before(t_data *data, int i)
+static void	close_before(t_data *data, int id)
 {
-	if(data->status == 0)
-		close_infile(data, i);
-	else if(data->status == 1)
-		close_child(data, i);
-	else if(data->status == 2)
-		close_outfile(data, i);
-
+	if (data->status == 0)
+		close_infile(data, id);
+	else if (data->status == 1)
+		close_child(data, id);
+	else if (data->status == 2)
+		close_outfile(data, id);
 }
 
 static t_data	*make_struct(int ac)
@@ -77,27 +77,36 @@ int	main(int ac, char *av[], char *envp[])
 
 	data = make_struct(ac);
 	open_pipes(data);
-	i = 1;
-	while (av[i])
+	//dprintf(2, "after the pipe is [%d]\n", data->pipes[0][1]);
+	i = 0;
+	while (i < ac - 3)
 	{
-		data->pid[i - 1] = fork();
-		if(data->pid[i - 1] == -1)
+		data->pid[i] = fork();
+		if (data->pid[i] == -1)
 			exit(1);
-		if (data->pid[i - 1] == 0)
+		if (data->pid[i] == 0)
 		{
 			data_status(data, i, ac);
-			if (i == 1 || i == ac - 1)
-				open_file(i, av[i], data);
-			close_before(data, i - 1);
-			if (i != 1 && i != ac - 1)
-				get_path(&envp[0], get_cmd(av[i]));
-			return 0;
+			if (data->status == 0 || data->status == 2)
+			{
+				//dprintf(2, "status is [%d][%s]\n", data->status, av[i]);
+				open_file(i + 1, av[i + 1], data);
+			}
+			dprintf(2,"here<<<<\n");
+			close_before(data, i);
+			dprintf(2,"next<<<<\n");
+			if(data->status == 2)
+			{
+				get_path(&envp[0], get_cmd(av[i + 2]));
+			}
+			return (0);
 		}
 		i++;
 	}
-	return (0);
+	i = 0;
+	while (i < data->proc)
+		waitpid(data->pid[i++], NULL, WUNTRACED);
 }
-
 
 //created child + parent 
 //need to pipe in child

@@ -6,7 +6,7 @@
 #    By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/17 10:44:04 by plertsir          #+#    #+#              #
-#    Updated: 2023/06/23 17:56:50 by plertsir         ###   ########.fr        #
+#    Updated: 2023/06/27 11:21:36 by plertsir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ HEADERS_DIRECTORY = ./includes/
 HEADERS = $(addprefix $(HEADERS_DIRECTORY), $(HEADERS_LIST))
 
 SOURCES_DIRECTORY_A = ./sources/main/
-SOURCES_LIST_A = pipex.c execute.c
+SOURCES_LIST_A = pipex.c execute.c close_pipe.c
 
 SOURCES_DIRECTORY_B = ./sources/input/
 SOURCES_LIST_B = get_cmd.c get_path.c

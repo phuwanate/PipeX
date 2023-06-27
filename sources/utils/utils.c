@@ -6,7 +6,7 @@
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:32:20 by plertsir          #+#    #+#             */
-/*   Updated: 2023/06/23 17:47:56 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/06/27 17:44:09 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 #include "libft.h"
 #include <fcntl.h>
 #include <unistd.h>
+#include <errno.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 void	open_file(int proc_id, char *av, t_data *data)
 {
@@ -26,7 +29,11 @@ void	open_file(int proc_id, char *av, t_data *data)
 	{
 		in_file = open(av, O_RDONLY);
 		if (in_file == -1)
+		{
+			ft_putstr_fd("result: ", 2);
+			perror(NULL);
 			exit(1);
+		}
 		dup2(in_file, STDIN_FILENO);
 		close(in_file);
 	}
@@ -34,10 +41,9 @@ void	open_file(int proc_id, char *av, t_data *data)
 	{
 		out_file = open(av, O_TRUNC | O_WRONLY | O_CREAT, 0644);
 		if (out_file == -1)
-			exit(1);
+			exit(8);
 		dup2(out_file, STDOUT_FILENO);
 		close(out_file);
-		data->status = 2;
 	}
 }
 
@@ -66,16 +72,16 @@ void	force_quit(int nb)
 	else
 	{
 		ft_putstr_fd("Error\n", 2);
-		exit(1);
+		exit(9);
 	}
 }
 
-void data_status(t_data *data, int nb, int ac)
+void	data_status(t_data *data, int nb_proc, int ac)
 {
-	if(nb == 1)
-		data->status == 0;
-	else if(nb == ac - 1)
-		data->status == 3;
+	if (nb_proc == 1)
+		data->status = 0;
+	else if (nb_proc == ac - 1)
+		data->status = 2;
 	else
-		data->status == 1;
+		data->status = 1;
 }
