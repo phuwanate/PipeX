@@ -15,7 +15,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-void	open_file(int proc_id, char *av)
+void	open_file(int proc_id, char *av, t_data *data)
 {
 	int	in_file;
 	int	out_file;
@@ -37,6 +37,7 @@ void	open_file(int proc_id, char *av)
 			exit(1);
 		dup2(out_file, STDOUT_FILENO);
 		close(out_file);
+		data->status = 2;
 	}
 }
 
@@ -67,4 +68,14 @@ void	force_quit(int nb)
 		ft_putstr_fd("Error\n", 2);
 		exit(1);
 	}
+}
+
+void data_status(t_data *data, int nb, int ac)
+{
+	if(nb == 1)
+		data->status == 0;
+	else if(nb == ac - 1)
+		data->status == 3;
+	else
+		data->status == 1;
 }

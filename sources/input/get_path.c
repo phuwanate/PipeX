@@ -39,7 +39,6 @@ static void	ext_path(char *path_exec, char **envp, size_t len, char **split_av)
 
 	errno = 0;
 	path = ft_substr(path_exec, 5, len);
-	printf("%s", path);
 	path2 = split_path(path, ':');
 	free(path);
 	i = 0;
@@ -57,6 +56,7 @@ static void	ext_path(char *path_exec, char **envp, size_t len, char **split_av)
 	if (errno != 0)
 		cmd_err(*split_av);
 }
+
 
 void	get_path(char **envp, char **split_av)
 {
