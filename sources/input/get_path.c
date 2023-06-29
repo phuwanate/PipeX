@@ -6,7 +6,7 @@
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 11:42:38 by plertsir          #+#    #+#             */
-/*   Updated: 2023/06/27 15:21:19 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/06/29 17:06:50 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ static void	ext_path(char *path_exec, char **envp, size_t len, char **split_av)
 		cmd_err(*split_av);
 }
 
-
 void	get_path(char **envp, char **split_av)
 {
 	int		i;
@@ -66,6 +65,7 @@ void	get_path(char **envp, char **split_av)
 	size_t	len;
 
 	i = 0;
+	path_exec = NULL;
 	while (envp[i])
 	{
 		len = ft_strlen(envp[i]);

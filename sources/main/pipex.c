@@ -6,7 +6,7 @@
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 11:46:55 by plertsir          #+#    #+#             */
-/*   Updated: 2023/06/27 19:14:51 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/06/29 17:03:54 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static void	open_pipes(t_data *data)
 	int	i;
 
 	data->pipes = malloc(data->pipe_nb * sizeof(int *));
-	dprintf(2, "pipe_nb[%d]\n", data->pipe_nb);
 	if (!data->pipes)
 		exit(4);
 	i = 0;
@@ -38,7 +37,6 @@ static void	open_pipes(t_data *data)
 			exit(6);
 		i++;
 	}
-	dprintf(2, "the pipe is [%d]\n", data->pipes[0][1]);
 }
 
 static void	close_before(t_data *data, int id)
@@ -77,9 +75,8 @@ int	main(int ac, char *av[], char *envp[])
 
 	data = make_struct(ac);
 	open_pipes(data);
-	//dprintf(2, "after the pipe is [%d]\n", data->pipes[0][1]);
 	i = 0;
-	while (i < ac - 3)
+	while (i < data->proc)
 	{
 		data->pid[i] = fork();
 		if (data->pid[i] == -1)
@@ -88,21 +85,13 @@ int	main(int ac, char *av[], char *envp[])
 		{
 			data_status(data, i, ac);
 			if (data->status == 0 || data->status == 2)
-			{
-				//dprintf(2, "status is [%d][%s]\n", data->status, av[i]);
-				open_file(i + 1, av[i + 1], data);
-			}
-			dprintf(2,"here<<<<\n");
+				open_file(i, av, ac);
 			close_before(data, i);
-			dprintf(2,"next<<<<\n");
-			if(data->status == 2)
-			{
-				get_path(&envp[0], get_cmd(av[i + 2]));
-			}
-			return (0);
+			get_path(&envp[0], get_cmd(av[i + 2]));
 		}
 		i++;
 	}
+	close_pipe_main(data);
 	i = 0;
 	while (i < data->proc)
 		waitpid(data->pid[i++], NULL, WUNTRACED);

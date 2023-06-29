@@ -6,7 +6,7 @@
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:13:53 by plertsir          #+#    #+#             */
-/*   Updated: 2023/06/23 11:32:30 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/06/29 17:05:56 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,14 @@ void	param_error(char **split_av)
 		ft_putstr_fd(": ", 2);
 		j++;
 	}
+	perror(NULL);
+	exit(1);
+}
+
+void	infile_error(char *in_file)
+{
+	ft_putstr_fd(in_file, 2);
+	ft_putstr_fd(": ", 2);
 	perror(NULL);
 	exit(1);
 }
