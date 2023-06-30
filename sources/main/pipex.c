@@ -6,7 +6,7 @@
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 11:46:55 by plertsir          #+#    #+#             */
-/*   Updated: 2023/06/29 17:03:54 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/06/30 18:36:10 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,21 @@ static void	open_pipes(t_data *data)
 
 	data->pipes = malloc(data->pipe_nb * sizeof(int *));
 	if (!data->pipes)
-		exit(4);
+		exit(1);
 	i = 0;
 	while (i < data->pipe_nb)
 	{
 		data->pipes[i] = (int *)malloc(2 * sizeof(int));
 		if (!data->pipes[i])
-			exit(5);
+		{
+			free_mem(data);
+			exit(1);
+		}
 		if (pipe(data->pipes[i]))
-			exit(6);
+		{
+			free_mem(data);
+			exit(1);
+		}
 		i++;
 	}
 }
@@ -56,12 +62,12 @@ static t_data	*make_struct(int ac)
 	data = malloc(sizeof(t_data));
 	data->proc = ac - 3;
 	if (!data)
-		exit(2);
+		exit(1);
 	data->pid = malloc(data->proc * sizeof(int));
 	if (!(data->pid))
 	{
-		free(data->pid);
-		exit(3);
+		free_mem(data);
+		exit(1);
 	}
 	data->pipe_nb = data->proc - 1;
 	data->status = 0;
@@ -71,6 +77,7 @@ static t_data	*make_struct(int ac)
 int	main(int ac, char *av[], char *envp[])
 {
 	int		i;
+	int		status;
 	t_data	*data;
 
 	data = make_struct(ac);
@@ -80,7 +87,7 @@ int	main(int ac, char *av[], char *envp[])
 	{
 		data->pid[i] = fork();
 		if (data->pid[i] == -1)
-			exit(1);
+			fork_error(data);
 		if (data->pid[i] == 0)
 		{
 			data_status(data, i, ac);
@@ -94,8 +101,7 @@ int	main(int ac, char *av[], char *envp[])
 	close_pipe_main(data);
 	i = 0;
 	while (i < data->proc)
-		waitpid(data->pid[i++], NULL, WUNTRACED);
+		waitpid(data->pid[i++], &status, WUNTRACED);
+	free_mem(data);
+	exit (WEXITSTATUS(status));
 }
-
-//created child + parent 
-//need to pipe in child

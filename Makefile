@@ -6,7 +6,7 @@
 #    By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/17 10:44:04 by plertsir          #+#    #+#              #
-#    Updated: 2023/06/29 13:59:58 by plertsir         ###   ########.fr        #
+#    Updated: 2023/06/30 17:12:27 by plertsir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,8 @@ $(OBJECTS_DIRECTORY)%.o: $(SOURCES_DIRECTORY_D)%.c $(HEADERS)
 
 $(LIBFT):
 	$(MAKE) -sC $(LIBFT_DIRECTORY)
+
+bonus: all
 
 clean:
 	$(MAKE) -sC $(LIBFT_DIRECTORY) clean

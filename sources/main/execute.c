@@ -6,7 +6,7 @@
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 14:30:04 by plertsir          #+#    #+#             */
-/*   Updated: 2023/06/29 17:08:15 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/06/30 17:09:51 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,9 @@ void	go_exec(char *path, char **split_av, char **envp)
 		len_av = ft_strlen(split_av[i]);
 		path_exec[i] = (char *)malloc(len_av + 1 * sizeof(char));
 		path_cpy(path_exec[i], split_av[i]);
+		i++;
 	}
 	execve(path_exec[0], path_exec, envp);
 	free_2d(path_exec);
-	param_error(split_av);
+	// param_error(split_av);
 }
