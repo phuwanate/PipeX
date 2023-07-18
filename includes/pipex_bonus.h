@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:32:16 by plertsir          #+#    #+#             */
-/*   Updated: 2023/07/18 12:56:57 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/07/18 18:29:57 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef PIPEX_BONUS_H
+# define PIPEX_BONUS_H
 
 typedef struct s_data
 {
@@ -24,7 +24,6 @@ typedef struct s_data
 }				t_data;
 
 int		find_path(const char *s1);
-void	force_quit(int nb);
 void	get_path(t_data *data, char **envp, char **spl_av);
 char	**get_cmd(t_data *data, char *av);
 void	free_2d(char **ptr);
@@ -42,5 +41,10 @@ void	file_error(char *file);
 void	path_error(t_data *data, char *path);
 void	free_mem(t_data *data, int status);
 void	fork_error(t_data *data);
+int		is_heredoc(char **av);
+void	normal_infile(t_data *data, int ac, char **av, char **envp);
+void	heredoc_infile(t_data *data, int ac, char **av, char **envp);
+void	out_heredoc(char **av, int ac);
+void	heredoc_status(t_data *data, int nb_proc, int ac);
 
 #endif

@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   input_error.c                                      :+:      :+:    :+:   */
+/*   input_error_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:13:53 by plertsir          #+#    #+#             */
-/*   Updated: 2023/07/05 13:44:00 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/07/18 13:03:19 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 #include "libft.h"
 #include "stdlib.h"
 #include <stdio.h>
 
 void	param_error(void)
 {
-	ft_putstr_fd("Error parmeters should be like : ", 2);
-	ft_putstr_fd("./pipex infile cmd(1) cmd(2) ... cmd(n) outfile.\n", 2);
+	ft_putstr_fd("Error parameters should be like : \n", 2);
+	ft_putstr_fd("$> ./pipex infile cmd1 cmd2 outfile\n", 2);
 	exit(1);
 }
 
-void	cmd_err(t_data *data, char *split_av)
+void	cmd_err(t_data *data, char *spl_av)
 {
-	ft_putstr_fd(split_av, 2);
+	ft_putstr_fd(spl_av, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putendl_fd("command not found", 2);
 	free_mem(data, 127);

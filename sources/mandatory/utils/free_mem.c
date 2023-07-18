@@ -6,7 +6,7 @@
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:12:25 by plertsir          #+#    #+#             */
-/*   Updated: 2023/06/30 21:52:54 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/07/18 10:44:45 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	free_2d(char **ptr)
 	ptr = NULL;
 }
 
-void	int_free_2d(int **ptr ,int size)
+void	int_free_2d(int **ptr, int size)
 {
 	int	i;
 
@@ -42,7 +42,6 @@ void	int_free_2d(int **ptr ,int size)
 	free(ptr);
 	ptr = NULL;
 }
-
 
 void	free_mem(t_data *data, int status)
 {
