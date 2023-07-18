@@ -6,7 +6,7 @@
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 14:30:04 by plertsir          #+#    #+#             */
-/*   Updated: 2023/06/30 17:09:51 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/06/30 23:05:40 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static size_t	len_split_av(char **split_av)
 	return (i);
 }
 
-void	go_exec(char *path, char **split_av, char **envp)
+void	go_exec(t_data *data, char *path, char **split_av, char **envp)
 {
 	char	**path_exec;
 	size_t	len_av;
@@ -65,5 +65,5 @@ void	go_exec(char *path, char **split_av, char **envp)
 	}
 	execve(path_exec[0], path_exec, envp);
 	free_2d(path_exec);
-	// param_error(split_av);
+	free_mem(data, 1);
 }

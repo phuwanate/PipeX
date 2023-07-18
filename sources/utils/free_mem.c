@@ -6,7 +6,7 @@
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 12:12:25 by plertsir          #+#    #+#             */
-/*   Updated: 2023/06/30 18:28:28 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/06/30 21:52:54 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	int_free_2d(int **ptr ,int size)
 }
 
 
-void	free_mem(t_data *data)
+void	free_mem(t_data *data, int status)
 {
 	if (data->pipes != NULL)
 		int_free_2d(data->pipes, data->pipe_nb);
@@ -55,4 +55,5 @@ void	free_mem(t_data *data)
 		free(data);
 		data = NULL;
 	}
+	exit(status);
 }

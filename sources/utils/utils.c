@@ -6,7 +6,7 @@
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:32:20 by plertsir          #+#    #+#             */
-/*   Updated: 2023/06/29 17:05:55 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/07/05 13:46:08 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	open_file(int proc_id, char **av, int ac)
 	{
 		in_file = open(av[proc_id + 1], O_RDONLY);
 		if (in_file == -1)
-			infile_error(av[proc_id + 1]);
+			file_error(av[proc_id + 1]);
 		dup2(in_file, STDIN_FILENO);
 		close(in_file);
 	}
@@ -37,7 +37,7 @@ void	open_file(int proc_id, char **av, int ac)
 	{
 		out_file = open(av[ac - 1], O_TRUNC | O_WRONLY | O_CREAT, 0644);
 		if (out_file == -1)
-			exit(8);
+			file_error(av[ac - 1]);
 		dup2(out_file, STDOUT_FILENO);
 		close(out_file);
 	}

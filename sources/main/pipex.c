@@ -6,7 +6,7 @@
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 11:46:55 by plertsir          #+#    #+#             */
-/*   Updated: 2023/06/30 18:36:10 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/07/01 16:44:08 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,15 @@ static void	open_pipes(t_data *data)
 
 	data->pipes = malloc(data->pipe_nb * sizeof(int *));
 	if (!data->pipes)
-		exit(1);
+		free_mem(data, 1);
 	i = 0;
 	while (i < data->pipe_nb)
 	{
 		data->pipes[i] = (int *)malloc(2 * sizeof(int));
 		if (!data->pipes[i])
-		{
-			free_mem(data);
-			exit(1);
-		}
+			free_mem(data, 1);
 		if (pipe(data->pipes[i]))
-		{
-			free_mem(data);
-			exit(1);
-		}
+			free_mem(data, 1);
 		i++;
 	}
 }
@@ -65,23 +59,21 @@ static t_data	*make_struct(int ac)
 		exit(1);
 	data->pid = malloc(data->proc * sizeof(int));
 	if (!(data->pid))
-	{
-		free_mem(data);
-		exit(1);
-	}
+		free_mem(data, 1);
 	data->pipe_nb = data->proc - 1;
 	data->status = 0;
+	open_pipes(data);
 	return (data);
 }
 
 int	main(int ac, char *av[], char *envp[])
 {
 	int		i;
-	int		status;
 	t_data	*data;
 
+	if(ac < 5)
+		param_error();
 	data = make_struct(ac);
-	open_pipes(data);
 	i = 0;
 	while (i < data->proc)
 	{
@@ -94,14 +86,13 @@ int	main(int ac, char *av[], char *envp[])
 			if (data->status == 0 || data->status == 2)
 				open_file(i, av, ac);
 			close_before(data, i);
-			get_path(&envp[0], get_cmd(av[i + 2]));
+			get_path(data, &envp[0], get_cmd(data, av[i + 2]));
 		}
 		i++;
 	}
 	close_pipe_main(data);
 	i = 0;
 	while (i < data->proc)
-		waitpid(data->pid[i++], &status, WUNTRACED);
-	free_mem(data);
-	exit (WEXITSTATUS(status));
+		waitpid(data->pid[i++], &data->status, WUNTRACED);
+	free_mem(data, WEXITSTATUS(data->status));
 }
