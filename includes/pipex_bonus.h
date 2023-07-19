@@ -6,7 +6,7 @@
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:32:16 by plertsir          #+#    #+#             */
-/*   Updated: 2023/07/19 16:10:08 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/07/19 19:40:20 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ void	out_heredoc(char **av, int ac);
 void	heredoc_status(t_data *data, int nb_proc, int ac);
 char	*end_doc(char *hay_stack, char *needle);
 void	check_slash(t_data *data, char *cmd, char **spl_av, char **envp);
+int   	doc_cmp(const char *s1, const char *s2);
 
 #endif

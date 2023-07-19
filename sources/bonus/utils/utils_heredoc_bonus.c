@@ -6,7 +6,7 @@
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 12:44:07 by plertsir          #+#    #+#             */
-/*   Updated: 2023/07/19 16:13:57 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/07/19 19:52:30 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,25 @@ int	is_heredoc(char **av, int ac)
 	}
 	else
 		return (0);
+}
+
+int    doc_cmp(const char *s1, const char *s2)
+{
+    size_t            i;
+    unsigned char    *ptr1;
+    unsigned char    *ptr2;
+
+    ptr1 = (unsigned char *)s1;
+    ptr2 = (unsigned char *)s2;
+    (void)ptr2;
+	i = 0;
+    while (ptr1[i] && ptr2[i])
+    {
+        if (ptr1[i] != ptr2[i])
+            break ;
+        i++;
+    }
+    if(ptr1[i] != '\n' || ptr2[i] != '\0')
+      return (1);
+    return (0);
 }

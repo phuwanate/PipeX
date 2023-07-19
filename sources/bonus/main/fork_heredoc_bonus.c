@@ -6,7 +6,7 @@
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 13:19:24 by plertsir          #+#    #+#             */
-/*   Updated: 2023/07/19 15:18:11 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/07/19 19:40:42 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,15 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-static int	init_fd(int status)
+static void	init_fd(void)
 {
 	int	fd;
-
-	if (status == 1)
-	{
-		fd = open("temp.txt", O_RDONLY);
-		if (fd == -1)
-			file_error("temp.txt");
-		dup2(fd, STDIN_FILENO);
-		close(fd);
-	}
-	return (0);
+	
+	fd = open("temp.txt", O_RDONLY);
+	if (fd == -1)
+		file_error("temp.txt");
+	dup2(fd, STDIN_FILENO);
+	close(fd);
 }
 
 static void	open_heredoc(char **av)
@@ -38,13 +34,12 @@ static void	open_heredoc(char **av)
 	char	*in_doc;
 	int		fd;
 
-	init_fd(0);
 	fd = open("temp.txt", O_TRUNC | O_WRONLY | O_CREAT, 0644);
 	while (1)
 	{
 		in_doc = get_next_line(0);
 		len_doc = ft_strlen(in_doc);
-		if (ft_strncmp(in_doc, av[2], ft_strlen(av[2])) == 0)
+		if (doc_cmp(in_doc, av[2]) == 0)
 		{
 			free(in_doc);
 			break ;
@@ -53,7 +48,7 @@ static void	open_heredoc(char **av)
 		free(in_doc);
 	}
 	close(fd);
-	init_fd(1);
+	init_fd();
 }
 
 static void	close_before_heredoc(t_data *data, int id)
