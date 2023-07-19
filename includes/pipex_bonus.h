@@ -6,7 +6,7 @@
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 12:32:16 by plertsir          #+#    #+#             */
-/*   Updated: 2023/07/18 18:29:57 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/07/19 16:10:08 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,12 @@ void	file_error(char *file);
 void	path_error(t_data *data, char *path);
 void	free_mem(t_data *data, int status);
 void	fork_error(t_data *data);
-int		is_heredoc(char **av);
+int		is_heredoc(char **av, int ac);
 void	normal_infile(t_data *data, int ac, char **av, char **envp);
 void	heredoc_infile(t_data *data, int ac, char **av, char **envp);
 void	out_heredoc(char **av, int ac);
 void	heredoc_status(t_data *data, int nb_proc, int ac);
+char	*end_doc(char *hay_stack, char *needle);
+void	check_slash(t_data *data, char *cmd, char **spl_av, char **envp);
 
 #endif

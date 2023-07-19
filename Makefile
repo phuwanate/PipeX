@@ -6,7 +6,7 @@
 #    By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/17 10:44:04 by plertsir          #+#    #+#              #
-#    Updated: 2023/07/18 14:34:30 by plertsir         ###   ########.fr        #
+#    Updated: 2023/07/19 16:06:35 by plertsir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,17 +44,17 @@ SOURCES_LIST_D = utils.c free_mem.c
 # Bonus sources
 SOURCES_DIRECTORY_A_BONUS = ./sources/bonus/main/
 SOURCES_LIST_A_BONUS = pipex_bonus.c execute_bonus.c close_pipe_bonus.c \
-					heredoc_bonus.c fork_heredoc_bonus.c fork_infile_bonus.c
+					fork_heredoc_bonus.c fork_infile_bonus.c
 
 SOURCES_DIRECTORY_B_BONUS = ./sources/bonus/input/
-SOURCES_LIST_B_BONUS = get_cmd_bonus.c get_path_bonus.c
+SOURCES_LIST_B_BONUS = get_cmd_bonus.c get_path_bonus.c  get_heredoc_bonus.c
 
 SOURCES_DIRECTORY_C_BONUS = ./sources/bonus/handle_error/
 SOURCES_LIST_C_BONUS = input_error_bonus.c
 
 SOURCES_DIRECTORY_D_BONUS = ./sources/bonus/utils/
 SOURCES_LIST_D_BONUS = utils_bonus.c free_mem_bonus.c get_next_line_utils_bonus.c \
-					get_next_line_bonus.c
+					get_next_line_bonus.c utils_heredoc_bonus.c
 
 OBJECTS_DIRECTORY = objects/
 OBJECTS_DIRECTORY_BONUS = objects_bonus/

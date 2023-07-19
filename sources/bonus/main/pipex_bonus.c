@@ -6,7 +6,7 @@
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 11:46:55 by plertsir          #+#    #+#             */
-/*   Updated: 2023/07/18 18:38:52 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/07/19 16:10:15 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,16 +67,16 @@ int	main(int ac, char *av[], char *envp[])
 
 	if (ac < 5)
 		param_error();
-	heredoc_status = is_heredoc(av);
+	heredoc_status = is_heredoc(av, ac);
 	data = make_struct(heredoc_status, ac);
 	if (heredoc_status == 0)
 		normal_infile(data, ac, av, envp);
 	else
 		heredoc_infile(data, ac, av, envp);
 	close_pipe_main(data);
+	unlink("temp.txt");
 	i = 0;
 	while (i < data->proc)
 		waitpid(data->pid[i++], &data->status, WUNTRACED);
-	unlink("temp.txt");
 	free_mem(data, WEXITSTATUS(data->status));
 }

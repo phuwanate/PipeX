@@ -6,7 +6,7 @@
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 11:42:38 by plertsir          #+#    #+#             */
-/*   Updated: 2023/07/18 13:03:11 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/07/19 15:30:59 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	**split_path(t_data *data, char *str, char c)
 	return (path_split);
 }
 
-static void	check_slash(t_data *data, char *cmd, char **spl_av, char **envp)
+void	check_slash(t_data *data, char *cmd, char **spl_av, char **envp)
 {
 	if (ft_strchr(cmd, '/') != NULL)
 	{

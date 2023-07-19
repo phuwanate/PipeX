@@ -6,7 +6,7 @@
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 13:19:24 by plertsir          #+#    #+#             */
-/*   Updated: 2023/07/18 18:30:37 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/07/19 15:18:11 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	open_heredoc(char **av)
 	{
 		in_doc = get_next_line(0);
 		len_doc = ft_strlen(in_doc);
-		if (ft_strnstr(in_doc, av[2], len_doc) != NULL)
+		if (ft_strncmp(in_doc, av[2], ft_strlen(av[2])) == 0)
 		{
 			free(in_doc);
 			break ;

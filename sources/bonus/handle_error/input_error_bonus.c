@@ -6,7 +6,7 @@
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:13:53 by plertsir          #+#    #+#             */
-/*   Updated: 2023/07/18 13:03:19 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/07/19 16:12:46 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 
 void	param_error(void)
 {
-	ft_putstr_fd("Error parameters should be like : \n", 2);
-	ft_putstr_fd("$> ./pipex infile cmd1 cmd2 outfile\n", 2);
+	ft_putstr_fd("Error parameters should be like : \n\n", 2);
+	ft_putstr_fd("$> ./pipex infile cmd1 cmd2...cmd(n) outfile \nor\n", 2);
+	ft_putstr_fd("$> ./pipex here_doc LIMITER ", 2);
+	ft_putstr_fd("cmd1 cmd2...cmd(n) outfile\n\n", 2);
 	exit(1);
 }
 
