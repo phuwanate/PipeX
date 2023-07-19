@@ -45,7 +45,7 @@ int    doc_cmp(const char *s1, const char *s2)
     ptr2 = (unsigned char *)s2;
     (void)ptr2;
 	i = 0;
-    while (ptr1[i] && ptr2[i])
+    while (1)
     {
         if (ptr1[i] != ptr2[i])
             break ;
