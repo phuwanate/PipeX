@@ -6,7 +6,7 @@
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 13:19:24 by plertsir          #+#    #+#             */
-/*   Updated: 2023/07/19 19:40:42 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/07/20 09:37:39 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 static void	init_fd(void)
 {
 	int	fd;
-	
+
 	fd = open("temp.txt", O_RDONLY);
 	if (fd == -1)
 		file_error("temp.txt");
