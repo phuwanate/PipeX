@@ -6,7 +6,7 @@
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:13:53 by plertsir          #+#    #+#             */
-/*   Updated: 2023/07/20 20:35:51 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/07/20 20:56:18 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	path_error(t_data *data, char *path)
 {
 	ft_putstr_fd(path, 2);
 	ft_putstr_fd(": ", 2);
-	ft_putendl_fd(strerror(errno), 2);
+	ft_putendl_fd("No such file or directory", 2);
 	free_mem(data, 127);
 }
 
