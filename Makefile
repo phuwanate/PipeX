@@ -6,7 +6,7 @@
 #    By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/17 10:44:04 by plertsir          #+#    #+#              #
-#    Updated: 2023/07/19 16:06:35 by plertsir         ###   ########.fr        #
+#    Updated: 2023/07/20 17:35:28 by plertsir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ SOURCES_LIST_A_BONUS = pipex_bonus.c execute_bonus.c close_pipe_bonus.c \
 					fork_heredoc_bonus.c fork_infile_bonus.c
 
 SOURCES_DIRECTORY_B_BONUS = ./sources/bonus/input/
-SOURCES_LIST_B_BONUS = get_cmd_bonus.c get_path_bonus.c  get_heredoc_bonus.c
+SOURCES_LIST_B_BONUS = get_cmd_bonus.c get_path_bonus.c
 
 SOURCES_DIRECTORY_C_BONUS = ./sources/bonus/handle_error/
 SOURCES_LIST_C_BONUS = input_error_bonus.c
