@@ -6,7 +6,7 @@
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 11:42:38 by plertsir          #+#    #+#             */
-/*   Updated: 2023/07/20 19:17:22 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/07/20 20:15:30 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	check_slash(t_data *data, char *cmd, char **spl_av, char **envp)
 		{
 			ft_putstr_fd(*spl_av, 2);
 			ft_putstr_fd(": ", 2);
-			perror(NULL);
+			ft_putendl_fd(strerror(errno), 2);
 			free_mem(data, 126);
 		}
 		else
