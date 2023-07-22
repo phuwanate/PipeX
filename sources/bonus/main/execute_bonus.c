@@ -6,7 +6,7 @@
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 14:30:04 by plertsir          #+#    #+#             */
-/*   Updated: 2023/07/19 15:30:58 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/07/22 16:21:52 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	go_exec(t_data *data, char *path, char **spl_av, char **envp)
 		i++;
 	}
 	execve(path_exec[0], path_exec, envp);
+	free_2d(spl_av);
 	free_2d(path_exec);
 	free_mem(data, 1);
 }

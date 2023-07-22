@@ -6,7 +6,7 @@
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 16:13:53 by plertsir          #+#    #+#             */
-/*   Updated: 2023/07/20 20:56:18 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/07/22 16:26:15 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,21 @@ void	param_error(void)
 	exit(1);
 }
 
-void	cmd_err(t_data *data, char *spl_av)
+void	cmd_err(t_data *data, char **spl_av)
 {
-	ft_putstr_fd(spl_av, 2);
+	ft_putstr_fd(*spl_av, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putendl_fd("command not found", 2);
+	free_2d(spl_av);
 	free_mem(data, 127);
 }
 
-void	path_error(t_data *data, char *path)
+void	path_error(t_data *data, char **path)
 {
-	ft_putstr_fd(path, 2);
+	ft_putstr_fd(*path, 2);
 	ft_putstr_fd(": ", 2);
 	ft_putendl_fd("No such file or directory", 2);
+	free_2d(path);
 	free_mem(data, 127);
 }
 
