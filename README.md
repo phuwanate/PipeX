@@ -7,7 +7,7 @@ Pipex is about creating pipe, the programe behave exactly the same as the shell 
 2. Use `make` to compile the mandatory part (support 1 pipe).  
 3. Use `make bonus` to compile the bonus part (support multiple pipes). 
 
-## execute the program as follow:
+## Execute the program as follow:
 
 ### This:
 **`$> ./pipex file1 cmd(1) cmd(2) cmd(3) ... cmd(n) file2`**
