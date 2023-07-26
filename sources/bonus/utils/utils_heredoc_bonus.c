@@ -6,7 +6,7 @@
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 12:44:07 by plertsir          #+#    #+#             */
-/*   Updated: 2023/07/20 17:40:52 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/07/25 09:51:43 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "pipex_bonus.h"
 #include "get_next_line_bonus.h"
 #include <stdio.h>
-
 
 static void	not_heredoc(void)
 {

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/08 11:32:47 by plertsir          #+#    #+#             */
-/*   Updated: 2023/03/08 16:05:02 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/07/26 10:43:03 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 			del(currentnode->content);
 			free(currentnode);
 		}
-	*lst = NULL;
+		*lst = NULL;
 	}
 }

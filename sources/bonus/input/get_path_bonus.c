@@ -6,7 +6,7 @@
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/22 11:42:38 by plertsir          #+#    #+#             */
-/*   Updated: 2023/07/22 16:47:24 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/07/25 09:54:00 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ static void	free_path(char *path)
 	path = NULL;
 }
 
-static char	**split_path(t_data *data, char *str, char c, char *pa, char **av)
+static char	**split_path(t_data *data, char *path, char **av)
 {
 	char	**path_split;
 
-	path_split = ft_split(str, c);
+	path_split = ft_split(path, ':');
 	if (!path_split)
 	{
-		free_path(pa);
+		free_path(path);
 		free_2d(av);
 		free_mem(data, 1);
 	}
@@ -67,7 +67,7 @@ static void	ext_path(t_data *data, char *path_exec, char **envp, char **spl_av)
 	errno = 0;
 	check_slash(data, *spl_av, spl_av, envp);
 	path = ft_substr(path_exec, 5, data->len_av);
-	path2 = split_path(data, path, ':', path, spl_av);
+	path2 = split_path(data, path, spl_av);
 	free_path(path);
 	i = 0;
 	while (path2[i])
