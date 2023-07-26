@@ -1,5 +1,5 @@
 # PipeX
-pipex is about creating pipe, the programe behave exactly the same as the shell command:  
+Pipex is about creating pipe, the programe behave exactly the same as the shell command:  
 **`$> < file1 cmd1 | cmd2 > file2`** 
 
 ## to compile the program follow the steps:  
