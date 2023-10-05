@@ -6,7 +6,7 @@
 /*   By: plertsir <plertsir@student.42bangkok.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/18 13:19:24 by plertsir          #+#    #+#             */
-/*   Updated: 2023/07/20 17:31:45 by plertsir         ###   ########.fr       */
+/*   Updated: 2023/10/05 17:27:12 by plertsir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static void	open_heredoc(char **av)
 	fd = open("temp.txt", O_TRUNC | O_WRONLY | O_CREAT, 0644);
 	while (1)
 	{
+		write(STDOUT_FILENO, "> ", 2);
 		in_doc = get_next_line(0);
 		len_doc = ft_strlen(in_doc);
 		if (end_doc(in_doc, av[2]) == 0)
